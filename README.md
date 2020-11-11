@@ -13,8 +13,8 @@ This is a public repository with tutorials in different aspects of social networ
 
 _Last updated 11-11-2020_
 
-- [Network Visualization using R]
-- [Network Analysis using R]
+- [Network Visualization using R](https://github.com/iowa-social-science-research-center/Network-Analysis-Workshops-2020/tree/main/Network%20Visualization%20using%20R)
+- [Network Analysis using R](https://github.com/iowa-social-science-research-center/Network-Analysis-Workshops-2020/tree/main/Network%20Analysis%20using%20R)
 - [Basic Network Analysis Using R](https://github.com/iowa-social-science-research-center/R-and-Stata-Workshops/tree/master/R/Basic%20Network%20Analysis%20Using%20R)
 - [Advanced Network Analysis Using R](https://github.com/iowa-social-science-research-center/R-and-Stata-Workshops/tree/master/R/Advanced%20Network%20Analysis%20Using%20R)
 
