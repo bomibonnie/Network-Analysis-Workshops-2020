@@ -1,6 +1,6 @@
 ##################################################################
 #  Name:   Network Analysis using R.R                            #
-#  Date:   December 1, 2020                                      #
+#  Date:   December 2, 2020                                      #
 #  Author: Bomi Lee                                              #
 #  Purpose: Calculate statistics of network data.                #
 #  Thanks to Elizabeth Menninga for some of this code.           #
@@ -102,9 +102,16 @@ library(statnet)
 ## Undirected Networks: flomarriage data
 data(florentine) 
 flomarriage # Let's look at the flomarriage data
+flobusiness
 ?flomarriage
+
 windows()
-plot(flomarriage, displaylabels = TRUE) 
+plot(flomarriage, 
+     displaylabels = TRUE) 
+
+windows()
+plot(flobusiness, 
+     displaylabels = TRUE) 
 
 ### Fit model
 flomodel_1 <- ergm(flomarriage ~ edges) 
@@ -114,18 +121,18 @@ summary(flomodel_1)
 
 ### Interpretation?
 
-### Let's add a term often thought to be a measure of "clustering" -- the number of completed triangles
+### Let's add a network configuration -- triangles
 set.seed(1664) #Seeding the RNG for demo purposes; otherwise, your output will vary
 flomodel_2 <- ergm(flomarriage ~ edges + triangle)
 
 summary(flomodel_2)
 
 flomodel_2$coef 
-flomodel_2$formula 
 
 ### Interpretation
 coef1 = flomodel_2$coef[1]
 coef2 = flomodel_2$coef[2]
+# logodds = coef1 * (change in # of ties) + coef2 * (change in # of triangles)
 logodds = coef1 + c(0,1,2) * coef2
 expit = function(x) 1/(1+exp(-x))
 ps = expit(logodds)
@@ -154,10 +161,10 @@ plot(flomarriage, vertex.cex = wealth/20, usearrows = FALSE, displaylabels = TRU
 flomodel_3 <- ergm(flomarriage ~ edges + nodecov('wealth'))
 summary(flomodel_3)
 
-### Can include both triangles and wealth
+### Can include triangles, wealth, and business ties
 
-flomodel_4 <- ergm(flomarriage ~ edges + triangle + nodecov("wealth"))
+flomodel_4 <- ergm(flomarriage ~ edges + triangle + nodecov("wealth") + edgecov(flobusiness))
 summary(flomodel_4)
-
+?ergm
 ### http://statnet.org/Workshops/ergm_tutorial.html#the_statnet_project
 ### https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2443947/
